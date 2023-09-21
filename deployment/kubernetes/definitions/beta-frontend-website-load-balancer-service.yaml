@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-website-load-balancer-beta-service
+  annotations:
+    service.beta.kubernetes.io/do-loadbalancer-name: "k8s-beta-frontend-website"
+    service.beta.kubernetes.io/do-loadbalancer-enable-backend-keepalive: "true"
+    service.beta.kubernetes.io/do-loadbalancer-tls-ports: "443"
+    # *.beta.mysimplaq.com
+    service.beta.kubernetes.io/do-loadbalancer-certificate-id: "a2483a98-4bb1-4306-bdff-66f817566359"
+    service.beta.kubernetes.io/do-loadbalancer-protocol: "https"
+    service.beta.kubernetes.io/do-loadbalancer-disable-lets-encrypt-dns-records: "false"
+    service.beta.kubernetes.io/do-loadbalancer-redirect-http-to-https: "true"
+spec:
+  type: LoadBalancer
+  selector:
+    app: frontend-website-beta
+    environment: beta
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 80
+    - name: https
+      protocol: TCP
+      port: 443
+      targetPort: 80

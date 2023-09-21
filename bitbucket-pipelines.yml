@@ -1,0 +1,85 @@
+image: node:18.12.1-alpine
+
+options:
+  size: 1x
+
+definitions:
+  services:
+    docker:
+      memory: 2048
+
+pipelines:
+  custom:
+    develop:
+      - step:
+          name: Manual Build for Develop
+          #          caches:
+          #            - node
+          script:
+            - npm install | tee -a logs.txt 2>&1
+            - npm run build | tee -a logs.txt 2>&1
+  branches:
+    beta:
+      - step:
+          name: Build for Beta & Push Image To Beta DigitalOcean
+          #          caches:
+          #            - node
+          services:
+            - docker
+          script:
+            - set -o pipefail # important! makes sure the build fails when ANY of piped commands fail
+            - export VERSION_LABEL=`[[ $BITBUCKET_TAG ]] && echo "$BITBUCKET_TAG-${BITBUCKET_COMMIT::7}" || echo "$BITBUCKET_REPO_FULL_NAME-${BITBUCKET_COMMIT::7}"`
+            - export VERSION_REF=`[[ $BITBUCKET_TAG ]] && echo "$BITBUCKET_TAG" || echo "$BITBUCKET_BRANCH"`
+            - cd deployment/kubernetes && docker build --build-arg VERSION=$VERSION_LABEL -t simplaq-frontend-website:beta -f ./Dockerfile-beta ../.. | tee -a logs.txt 2>&1
+            - export REMOTE_IMAGE_TAG="registry.digitalocean.com/simplaq/k8s-simplaq-frontend-website:beta"
+            - docker login -u $DIGITALOCEAN_CONTAINER_REGISTRY_TOKEN -p $DIGITALOCEAN_CONTAINER_REGISTRY_TOKEN registry.digitalocean.com | tee -a logs.txt 2>&1
+            - docker tag simplaq-frontend-website:beta $REMOTE_IMAGE_TAG | tee -a logs.txt 2>&1
+            - docker push $REMOTE_IMAGE_TAG | tee -a logs.txt 2>&1
+      - step:
+          name: Refresh Beta Kubernetes
+          trigger: automatic
+          script:
+            - pipe: atlassian/kubectl-run:3.6.0
+              variables:
+                KUBE_CONFIG: $KUBE_CONFIG
+                KUBECTL_COMMAND: 'rollout restart deployment frontend-website-beta'
+                # RESOURCE_PATH: '<string>' # Optional.
+                # KUBECTL_APPLY_ARGS: '<string>' # Optional.
+                # KUBECTL_ARGS: '<array>' # Optional.
+                # LABELS: '<array>' # Optional.
+                # WITH_DEFAULT_LABELS: '<boolean>' # Optional.
+                # DISABLE_VALIDATION: '<boolean>' # Optional.
+                # PRE_EXECUTION_SCRIPT: '<string>' # Optional.
+                # DEBUG: '<boolean>' # Optional.
+    production:
+      - step:
+          name: Build for Production & Push Image To Production DigitalOcean
+          #          caches:
+          #            - node
+          services:
+            - docker
+          script:
+            - set -o pipefail # important! makes sure the build fails when ANY of piped commands fail
+            - export VERSION_LABEL=`[[ $BITBUCKET_TAG ]] && echo "$BITBUCKET_TAG-${BITBUCKET_COMMIT::7}" || echo "$BITBUCKET_REPO_FULL_NAME-${BITBUCKET_COMMIT::7}"`
+            - export VERSION_REF=`[[ $BITBUCKET_TAG ]] && echo "$BITBUCKET_TAG" || echo "$BITBUCKET_BRANCH"`
+            - cd deployment/kubernetes && docker build --build-arg VERSION=$VERSION_LABEL -t simplaq-frontend-website:latest -f ./Dockerfile-production ../.. | tee -a logs.txt 2>&1
+            - export REMOTE_IMAGE_TAG="registry.digitalocean.com/simplaq/k8s-simplaq-frontend-website:latest"
+            - docker login -u $DIGITALOCEAN_CONTAINER_REGISTRY_TOKEN -p $DIGITALOCEAN_CONTAINER_REGISTRY_TOKEN registry.digitalocean.com | tee -a logs.txt 2>&1
+            - docker tag simplaq-frontend-website:latest $REMOTE_IMAGE_TAG | tee -a logs.txt 2>&1
+            - docker push $REMOTE_IMAGE_TAG | tee -a logs.txt 2>&1
+      - step:
+          name: Refresh Production Kubernetes
+          trigger: automatic
+          script:
+            - pipe: atlassian/kubectl-run:3.6.0
+              variables:
+                KUBE_CONFIG: $KUBE_CONFIG
+                KUBECTL_COMMAND: 'rollout restart deployment frontend-website'
+                # RESOURCE_PATH: '<string>' # Optional.
+                # KUBECTL_APPLY_ARGS: '<string>' # Optional.
+                # KUBECTL_ARGS: '<array>' # Optional.
+                # LABELS: '<array>' # Optional.
+                # WITH_DEFAULT_LABELS: '<boolean>' # Optional.
+                # DISABLE_VALIDATION: '<boolean>' # Optional.
+                # PRE_EXECUTION_SCRIPT: '<string>' # Optional.
+                # DEBUG: '<boolean>' # Optional.

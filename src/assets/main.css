@@ -1,0 +1,221 @@
+@import 'fonts.css';
+@import 'base.css';
+
+html {
+  scroll-behavior: smooth;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  position: absolute;
+  left: 0px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  opacity: 0;
+  z-index: 99999;
+}
+
+/* width */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+}
+
+body.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Horizontal */
+.custom-scrollbar.hr::-webkit-scrollbar {
+  height: 3px;
+}
+
+/* Track */
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 20px;
+}
+
+body.custom-scrollbar::-webkit-scrollbar-track {
+  background: theme('colors.grayLight2');
+}
+
+/* Handle */
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: theme('colors.graylight');
+  border-radius: 20px;
+}
+body.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: theme('colors.orange');
+}
+
+.orange-border {
+  position: relative;
+  overflow: hidden;
+}
+
+.orange-border::before {
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+}
+
+.orange-border::after {
+  position: absolute;
+  content: '';
+  width: 60%;
+  height: 4px;
+  left: 0;
+  bottom: 0;
+}
+
+.swiper-pagination {
+  bottom: 33px !important;
+}
+
+.auth-slider .swiper-pagination {
+  bottom: -2px !important;
+}
+
+.swiper-wrapper {
+  padding-bottom: 30px;
+}
+
+.swiper-pagination-bullet {
+  width: 6px !important;
+  height: 6px !important;
+  opacity: 1 !important;
+}
+
+.swiper-pagination-bullet-active,
+.auth-slider .swiper-pagination-bullet-active {
+  transform: scale(1.2);
+}
+
+.body-sliders .swiper-pagination {
+  display: none;
+}
+
+.previous-price {
+  position: relative;
+  max-width: max-content;
+}
+
+.previous-price::before {
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 1px;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 10px;
+  transform: rotate(-10deg);
+}
+
+@media screen and (max-width: 1024px) {
+  .swiper-pagination {
+    bottom: 25px !important;
+  }
+}
+
+@media screen and (max-width: 515px) {
+  .slider-btns-responsive {
+    display: none;
+  }
+
+  .slider-btns-responsive-sm {
+    display: flex !important;
+  }
+}
+
+.break-words {
+  word-break: break-word;
+}
+
+select {
+  min-width: 80px;
+  font-family: inherit;
+  /** for the dropdown indicator */
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 1.3em;
+}
+
+
+.router-link-exact-active .icon {
+  background: theme('colors.yellowLight');
+}
+.router-link-exact-active .icon svg {
+  color: theme('colors.orange');
+}
+.router-link-exact-active .icon.stroke svg path {
+  fill: theme('colors.orange');
+}
+
+.copy-icon.hide {
+  animation: hide 0.1s forwards;
+}
+
+.copied-icon {
+  transform: scale(0);
+}
+
+.copied-icon.show {
+  animation: show 0.1s forwards;
+}
+
+@keyframes hide {
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes show {
+  100% {
+    transform: scale(1);
+  }
+}
+
+.nav-item.active .chevron {
+  color: theme('colors.black') !important;
+  transform: rotate(180deg);
+}
+
+
+#placeSelect input,
+#placeSelect .multiselect__placeholder,
+#placeSelect input::placeholder,
+.multiselect__placeholder {
+  color: theme('colors.black') !important;
+  font-size: theme('fontSize.sm') !important;
+}
+
+.slider-target {
+  height: 3px;
+}
+
+.slider-connect {
+  background: theme('colors.black') !important;
+}
+
+.slider-handle {
+  width: 22px !important;
+  height: 22px !important;
+  border: 7px solid theme('colors.black') !important;
+  transform: translateY(-4px) !important;
+  box-shadow: none;
+}
+
+.slider-horizontal .slider-tooltip-top {
+  bottom: -32px !important;
+  left: 50% !important;
+  background: transparent !important;
+  transform: translate(-50%);
+  border: transparent !important;
+  color: theme('colors.black') !important;
+  font-size: 12px !important;
+}

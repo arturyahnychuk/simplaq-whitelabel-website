@@ -1,0 +1,31 @@
+# PRODUCTION frontend deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-website
+  labels:
+    tier: frontend
+spec:
+  selector:
+    matchLabels:
+      app: frontend-website
+      tier: frontend
+  replicas: 2 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: frontend-website
+        tier: frontend
+    spec:
+      nodeSelector:
+        doks.digitalocean.com/node-pool: simplaq-production-v3
+      containers:
+        - name: frontend-website
+          image: registry.digitalocean.com/simplaq/k8s-simplaq-frontend-website:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          envFrom:
+            # production config
+            - configMapRef:
+                name: frontend-website-production-config

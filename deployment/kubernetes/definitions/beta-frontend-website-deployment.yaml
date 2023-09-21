@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-website-beta
+  labels:
+    tier: frontend
+    environment: beta
+spec:
+  selector:
+    matchLabels:
+      app: frontend-website-beta
+      tier: frontend
+      environment: beta
+  replicas: 2 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: frontend-website-beta
+        tier: frontend
+        environment: beta
+    spec:
+      nodeSelector:
+        doks.digitalocean.com/node-pool: simplaq-beta-v3
+      containers:
+        - name: frontend-website-beta
+          image: registry.digitalocean.com/simplaq/k8s-simplaq-frontend-website:beta
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          envFrom:
+            # beta config
+            - configMapRef:
+                name: frontend-website-beta-config

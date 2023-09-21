@@ -1,0 +1,17 @@
+@font-face {
+    font-family: 'Raleway';
+    src: url('../assets/fonts/Raleway-Medium.ttf');
+}
+
+@font-face {
+    font-family: 'net-necks';
+    src: url('../assets/fonts/FontsFree-Net-Necks.ttf');
+}
+
+body {
+    font-family: 'Raleway', sans-serif;
+}
+
+input {
+    font-family: 'Raleway', sans-serif;
+}

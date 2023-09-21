@@ -1,0 +1,27 @@
+# PRODUCTION frontend load balancer
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-website-load-balancer-service
+  annotations:
+    service.beta.kubernetes.io/do-loadbalancer-name: "k8s-production-frontend-website"
+    service.beta.kubernetes.io/do-loadbalancer-enable-backend-keepalive: "true"
+    service.beta.kubernetes.io/do-loadbalancer-tls-ports: "443"
+    # *.mysimplaq.com
+    service.beta.kubernetes.io/do-loadbalancer-certificate-id: "3d09f92d-9a0a-492b-abac-6d57e807554a"
+    service.beta.kubernetes.io/do-loadbalancer-protocol: "https"
+    service.beta.kubernetes.io/do-loadbalancer-disable-lets-encrypt-dns-records: "false"
+    service.beta.kubernetes.io/do-loadbalancer-redirect-http-to-https: "true"
+spec:
+  type: LoadBalancer
+  selector:
+    app: frontend-website
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 80
+    - name: https
+      protocol: TCP
+      port: 443
+      targetPort: 80
