@@ -24,6 +24,7 @@
     "@vue/runtime-dom": "^3.3.4",
     "@vueform/slider": "^2.1.7",
     "@vueuse/head": "^1.1.26",
+    "axios": "^1.5.1",
     "choices.js": "^10.2.0",
     "dropzone": "^6.0.0-beta.2",
     "firebase": "^10.1.0",

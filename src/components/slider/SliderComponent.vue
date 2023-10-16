@@ -1,16 +1,13 @@
 <template>
   <div class="main-slider-parent w-full mb-[48px]">
     <div class="relative max-w-[1600px] mx-auto px-[25px]">
-
       <div :class="!controllers ? 'hidden' : ''" class="w-full flex items-center justify-between mb-[24px]">
         <h5 class="text-black xl:text-xl 2xl:text-2xl font-bold leading-[38px] tracking-[-0.4[x]]">{{ sectionTitle }}</h5>
         <div class="flex items-center gap-[16px]">
-          <RouterLink :to="{ name: routeName }"
-            class="text-pink font-semibold xl:text-sm 2xl:text-base leading-[22px] tracking-[-0.4px]">{{ $t('see_all') }}
+          <RouterLink :to="{ name: routeName }" class="text-pink font-semibold xl:text-sm 2xl:text-base leading-[22px] tracking-[-0.4px]">{{ $t('see_all') }}
           </RouterLink>
           <div class="slider-btns-responsive flex slider-nav items-center gap-[4px]">
-            <div @click="prev" class="cursor-pointer prev w-[48px] h-[48px] rounded-full bg-gray flex items-center justify-center">
-              
+            <div @click="prev" class="cursor-pointer prev w-[48px] h-[48px] rounded-full bg-gray flex items-center justify-center">              
               <Icon icon="radix-icons:chevron-left" class="text-xl text-black" />
             </div>
             <div @click="next" class="cursor-pointer next w-[48px] h-[48px] rounded-full bg-gray flex items-center justify-center">
@@ -20,9 +17,18 @@
         </div>
       </div>
       <!-- Swiper -->
-      <swiper ref="slider" class="mySwiper h-full w-full" :modules="modules" :autoplay="autoplay ? autoplay : false" @swiper="onSwiper"
-        :slides-per-view="slidesPerViewIs" :space-between="spaceBetween" @slideChange="onSlideChange"
-        :pagination="{ clickable: true }" navigation :scrollbar="{ draggable: true }">
+      <swiper 
+        ref="slider" 
+        class="mySwiper h-full w-full" 
+        :modules="modules" 
+        :autoplay="autoplay ? autoplay : false" 
+        @swiper="onSwiper"
+        :slides-per-view="slidesPerViewIs" :space-between="spaceBetween" 
+        @slideChange="onSlideChange"
+        :pagination="{ clickable: true }" 
+        navigation 
+        :scrollbar="{ draggable: true }"
+      >
         <slot></slot>
       </swiper>
       <div class="slider-btns-responsive-sm hidden justify-center flex slider-nav items-center gap-[4px]">
@@ -52,10 +58,10 @@ export default {
   },
   props: {
     routeName: {
-      required: false,
+      required: false
     },
     autoplay: {
-      required: false,
+      required: false
     },
     controllers: {},
     sectionTitle: {
@@ -112,7 +118,7 @@ export default {
     })
   },
   setup() {
-    const onSwiper = (swiper) => {
+    const onSwiper = swiper => {
       let authSliderBullets = document.querySelectorAll('.auth-slider .swiper-pagination-bullet')
       if (authSliderBullets) {
         authSliderBullets.forEach(bullet => {
@@ -124,7 +130,7 @@ export default {
         })
       }
     }
-    const onSlideChange = (swiper) => {
+    const onSlideChange = swiper => {
       let authSliderBullets = document.querySelectorAll('.auth-slider .swiper-pagination-bullet')
       if (authSliderBullets) {
         authSliderBullets.forEach(bullet => {

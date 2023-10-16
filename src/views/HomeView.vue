@@ -55,7 +55,9 @@
               <div class="flex items-center gap-[8px] ml-2">
                 <p class="text-sm font-medium text-black leading-[20px] tracking-[-0.2px]">{{ $t('free') }}</p>
                 <div class="divider-dot w-[4px] h-[4px] rounded-full bg-orange"></div>
-                <p class="text-sm font-medium text-black leading-[20px] tracking-[-0.2px] min-w-max">{{eventsDDMMYY[index].formattedTime}}</p>
+                <p class="text-sm font-medium text-black leading-[20px] tracking-[-0.2px] min-w-max">
+                  {{eventsDDMMYY[index].formattedTime}}
+                </p>
               </div>
             </div>
             <div class="w-full mt-[4px]">
@@ -1508,131 +1510,38 @@
     </SliderComponentVue>
 
     <!-- Mall -->
-    <SliderComponentVue
-      :controllers="true"
-      :sectionTitle="$t('popular_mall_brands')"
-      space-between="24"
-      slides-per-view="6"
-      :breakpoint="[
-        {
-          size: 1024,
-          view: 4
-        },
-        {
-          size: 768,
-          view: 3
-        },
-        {
-          size: 600,
-          view: 2
-        }
-      ]"
-    >
-      <swiper-slide>
-        <div class="w-full gap-[24px] grid grid-rows-2 col2-slider">
-          <div
-            class="relative w-full 2xl:h-[195px] xl:h-[166px] items-center justify-center border-[1px] border-graylight rounded-[16px] flex flex-col shadow-sm"
-          >
-            <img class="max-w-[80px] w-full object-cover" src="@/assets/imgs/ikea.svg" alt="" />
+    <div v-if="groupedCompanies">
+      <SliderComponentVue
+        :controllers="true"
+        :sectionTitle="$t('popular_mall_brands')"
+        space-between="24"
+        slides-per-view="5"
+        :breakpoint="[
+          {
+            size: 1024,
+            view: 4
+          },
+          {
+            size: 768,
+            view: 3
+          },
+          {
+            size: 600,
+            view: 2
+          }
+        ]"
+      >
+        <swiper-slide v-for="(slide, index) in groupedCompanies" :key="index">
+          <div class="item w-full gap-[24px] grid grid-rows-2 col2-slider">
+            <div v-for="(company, itemIndex) in slide" :key="itemIndex"
+              class="relative w-full h-[150px] items-center justify-center border-[1px] border-graylight rounded-[16px] flex flex-col shadow-sm"
+            >
+              <img class="max-w-[80px] w-full object-cover" :src="company.logo_picture" alt="" />
+            </div>
           </div>
-          <div
-            class="relative w-full py-[69px] items-center justify-center border-[1px] border-graylight rounded-[16px] flex flex-col shadow-sm"
-          >
-            <img class="max-w-[80px] w-full object-cover" src="@/assets/imgs/xl.svg" alt="" />
-          </div>
-        </div>
-      </swiper-slide>
-
-      <swiper-slide>
-        <div class="w-full gap-[24px] grid grid-rows-2 col2-slider">
-          <div
-            class="relative w-full 2xl:h-[195px] xl:h-[166px] items-center justify-center border-[1px] border-graylight rounded-[16px] flex flex-col shadow-sm"
-          >
-            <img class="max-w-[80px] w-full object-cover" src="@/assets/imgs/ikea.svg" alt="" />
-          </div>
-          <div
-            class="relative w-full py-[69px] items-center justify-center border-[1px] border-graylight rounded-[16px] flex flex-col shadow-sm"
-          >
-            <img class="max-w-[80px] w-full object-cover" src="@/assets/imgs/xl.svg" alt="" />
-          </div>
-        </div>
-      </swiper-slide>
-
-      <swiper-slide>
-        <div class="w-full gap-[24px] grid grid-rows-2 col2-slider">
-          <div
-            class="relative w-full 2xl:h-[195px] xl:h-[166px] items-center justify-center border-[1px] border-graylight rounded-[16px] flex flex-col shadow-sm"
-          >
-            <img class="max-w-[80px] w-full object-cover" src="@/assets/imgs/ikea.svg" alt="" />
-          </div>
-          <div
-            class="relative w-full py-[69px] items-center justify-center border-[1px] border-graylight rounded-[16px] flex flex-col shadow-sm"
-          >
-            <img class="max-w-[80px] w-full object-cover" src="@/assets/imgs/xl.svg" alt="" />
-          </div>
-        </div>
-      </swiper-slide>
-
-      <swiper-slide>
-        <div class="w-full gap-[24px] grid grid-rows-2 col2-slider">
-          <div
-            class="relative w-full 2xl:h-[195px] xl:h-[166px] items-center justify-center border-[1px] border-graylight rounded-[16px] flex flex-col shadow-sm"
-          >
-            <img class="max-w-[80px] w-full object-cover" src="@/assets/imgs/ikea.svg" alt="" />
-          </div>
-          <div
-            class="relative w-full py-[69px] items-center justify-center border-[1px] border-graylight rounded-[16px] flex flex-col shadow-sm"
-          >
-            <img class="max-w-[80px] w-full object-cover" src="@/assets/imgs/xl.svg" alt="" />
-          </div>
-        </div>
-      </swiper-slide>
-
-      <swiper-slide>
-        <div class="w-full gap-[24px] grid grid-rows-2 col2-slider">
-          <div
-            class="relative w-full 2xl:h-[195px] xl:h-[166px] items-center justify-center border-[1px] border-graylight rounded-[16px] flex flex-col shadow-sm"
-          >
-            <img class="max-w-[80px] w-full object-cover" src="@/assets/imgs/ikea.svg" alt="" />
-          </div>
-          <div
-            class="relative w-full py-[69px] items-center justify-center border-[1px] border-graylight rounded-[16px] flex flex-col shadow-sm"
-          >
-            <img class="max-w-[80px] w-full object-cover" src="@/assets/imgs/xl.svg" alt="" />
-          </div>
-        </div>
-      </swiper-slide>
-
-      <swiper-slide>
-        <div class="w-full gap-[24px] grid grid-rows-2 col2-slider">
-          <div
-            class="relative w-full 2xl:h-[195px] xl:h-[166px] items-center justify-center border-[1px] border-graylight rounded-[16px] flex flex-col shadow-sm"
-          >
-            <img class="max-w-[80px] w-full object-cover" src="@/assets/imgs/ikea.svg" alt="" />
-          </div>
-          <div
-            class="relative w-full py-[69px] items-center justify-center border-[1px] border-graylight rounded-[16px] flex flex-col shadow-sm"
-          >
-            <img class="max-w-[80px] w-full object-cover" src="@/assets/imgs/xl.svg" alt="" />
-          </div>
-        </div>
-      </swiper-slide>
-
-      <swiper-slide>
-        <div class="w-full gap-[24px] grid grid-rows-2 col2-slider">
-          <div
-            class="relative w-full 2xl:h-[195px] xl:h-[166px] items-center justify-center border-[1px] border-graylight rounded-[16px] flex flex-col shadow-sm"
-          >
-            <img class="max-w-[80px] w-full object-cover" src="@/assets/imgs/ikea.svg" alt="" />
-          </div>
-          <div
-            class="relative w-full py-[69px] items-center justify-center border-[1px] border-graylight rounded-[16px] flex flex-col shadow-sm"
-          >
-            <img class="max-w-[80px] w-full object-cover" src="@/assets/imgs/xl.svg" alt="" />
-          </div>
-        </div>
-      </swiper-slide>
-    </SliderComponentVue>
+        </swiper-slide>   
+      </SliderComponentVue>
+    </div>
 
     <!-- Entertain -->
     <SliderComponentVue
@@ -1934,6 +1843,7 @@
 <script lang="ts">
 import { useNewsStore, NewsData } from '@/stores/news/news'
 import { useUpcomingEventsStore, UpcomingEventsData } from '@/stores/upcoming-events/upcoming-events'
+import { useCompaniesStore, CompaniesData } from '@/stores/companies/companies'
 import { Pagination } from 'swiper'
 import { Navigation } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/vue'
@@ -1959,7 +1869,8 @@ export default {
       turnOnNotifications: false as boolean,
       accountSetup: false as boolean,
       newsData: null as NewsData['data'],
-      upcomingEventsData: null as UpcomingEventsData['data']
+      upcomingEventsData: null as UpcomingEventsData['data'],
+      companiesData: null as CompaniesData['data']
     }
   },
   components: {
@@ -2020,9 +1931,15 @@ export default {
       await upcomingEventsStore.fetchUpcomingEvents()
       this.upcomingEventsData = upcomingEventsStore.data
     },
+    async fetchCompanies() {
+      const companiesStore = useCompaniesStore()
+      await companiesStore.fetchCompanies()
+      this.companiesData = companiesStore.data
+    },    
     async fetchAllSliderItems() {
       this.fetchNews()
       this.fetchUpcomingEvents()
+      this.fetchCompanies()
     },
     formatDate(data: Record<string, any> | null, dateName: string) {
       if (!Array.isArray(data)) {
@@ -2082,7 +1999,20 @@ export default {
     },
     eventsDDMMYY(): string[] {
       return this.formatDate(this.upcomingEventsData, 'start')
-    }
+    },
+    groupedCompanies() {
+      const grouped = [];
+      if(this.compainesData) {
+        for (let i = 0; i < this.companiesData.length; i += 2) {
+          if (i + 1 < this.companiesData.length) {
+            grouped.push([this.companiesData[i], this.companiesData[i + 1]]);
+          } else {
+            grouped.push([this.companiesData[i]]);
+          }
+        }
+          return grouped;
+        }
+      }
   }
 }
 </script>
