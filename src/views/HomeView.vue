@@ -37,8 +37,13 @@
             <div class="absolute w-full top-[12px] px-[12px] flex items-start justify-between">
               <div class="date w-[39px] h-[42px] bg-white flex items-center justify-center rounded-[8px]">
                 <div class="flex flex-col items-center">
-                  <p class="text-sm font-bold text-black leading-[20px]">{{ eventsDDMMYY[index].day }}</p>
-                  <p class="text-s font-medium text-grayDark">{{ eventsDDMMYY[index].month }}</p>
+                  <p class="text-sm font-bold text-black leading-[20px]">
+                  {{ formatDate(item.start).day }}
+                  </p>
+                  <p class="text-s font-medium text-grayDark">
+                    {{ formatDate(item.start).month }}
+
+                  </p>
                 </div>
               </div>
               <Icon icon="solar:heart-outline" class="text-xl text-white" />
@@ -50,13 +55,13 @@
                 <div class="min-w-[48px] min-h-[48px] w-[48px] h-[48px] rounded-full flex items-center justify-center bg-gray">
                   <img class="w-full rounded-full" :src="item.picture_link" alt="" />
                 </div>
-                <p class="text-sm font-bold leading-[20px] text-black break-words">{{ item.title }}</p>
+                <p class="text-sm font-bold leading-[20px] text-black break-all">{{ item.title.length > 16 ? item.title.slice(0, 16) + '...' : item.title }}</p>
               </div>
-              <div class="flex items-center gap-[8px] ml-2">
+              <div class="flex items-center gap-[8px]">
                 <p class="text-sm font-medium text-black leading-[20px] tracking-[-0.2px]">{{ $t('free') }}</p>
                 <div class="divider-dot w-[4px] h-[4px] rounded-full bg-orange"></div>
-                <p class="text-sm font-medium text-black leading-[20px] tracking-[-0.2px] min-w-max">
-                  {{eventsDDMMYY[index].formattedTime}}
+                <p class="text-sm font-medium text-black leading-[20px] tracking-[-0.2px]">
+                  {{ formatDate(item.start).time }}
                 </p>
               </div>
             </div>
@@ -115,7 +120,7 @@
               </div>
               <div class="flex items-center gap-[8px] ml-2">
                 <p class="text-sm font-medium text-black leading-[20px] tracking-[-0.2px] min-w-max">
-                  {{ newsDDMMYY[index].formattedDate }}
+                  {{ formatDate(item.publish_at).fullDate }}
                 </p>
               </div>
             </div>
@@ -155,10 +160,10 @@
         }
       ]"
     >
-      <swiper-slide>
+      <swiper-slide v-for="(item, index) in rewardsData" :key="index">
         <div class="relative w-full flex flex-col shadow-sm">
           <div class="relative w-full lg:h-[315px] xl:h-[324px] 2xl:h-[382px] rounded-tl-[16px] rounded-tr-[16px] overflow-hidden">
-            <img class="w-full h-full object-cover" src="@/assets/imgs/item3.png" alt="" />
+            <img class="w-full h-full object-cover" :src="item.photo_link" :alt="item.title" />
             <div class="absolute w-full top-[12px] px-[12px] flex items-start justify-between">
               <div class="date px-[8px] py-[4px] bg-white flex items-center justify-center rounded-[8px]">
                 <div class="flex flex-col items-center">
@@ -173,258 +178,10 @@
           >
             <div class="flex items-center justify-between pb-[4px] border-b-[1px] border-gray">
               <div class="flex items-center gap-[12px]">
-                <div class="w-[48px] h-[48px] rounded-full flex items-center justify-center bg-gray">
-                  <img class="w-full max-w-[36px]" src="@/assets/imgs/zara.svg" alt="" />
+                <div class="min-w-[48px] h-[48px] overflow-hidden rounded-full flex items-center justify-center bg-gray">
+                  <img class="w-full h-full object-fit" :src="item.company.logo_picture" alt="" />
                 </div>
-                <p class="text-sm font-bold leading-[20px] text-black">ZARA</p>
-              </div>
-            </div>
-            <div class="w-full mt-[4px] flex gap-[4px] flex-col">
-              <p class="font-bold text-back text-sm leading-[20px]">15% {{ $t('off_discount_card') }}</p>
-              <p class="font-medium text-xs text-grayDark">46/50 {{ $t('pcs') }}</p>
-            </div>
-          </div>
-        </div>
-      </swiper-slide>
-      <swiper-slide>
-        <div class="relative w-full flex flex-col shadow-sm">
-          <div class="relative w-full lg:h-[315px] xl:h-[324px] 2xl:h-[382px] rounded-tl-[16px] rounded-tr-[16px] overflow-hidden">
-            <img class="w-full h-full object-cover" src="@/assets/imgs/item3.png" alt="" />
-            <div class="absolute w-full top-[12px] px-[12px] flex items-start justify-between">
-              <div class="date px-[8px] py-[4px] bg-white flex items-center justify-center rounded-[8px]">
-                <div class="flex flex-col items-center">
-                  <p class="text-sm font-bold text-black leading-[20px] lowercase">100 {{ $t('points') }}</p>
-                </div>
-              </div>
-              <Icon icon="solar:heart-outline" class="text-xl text-white" />
-            </div>
-          </div>
-          <div
-            class="w-full py-[12px] px-[16px] flex flex-col bg-white orange-border before:yellowLight after:bg-orange rounded-bl-[16px] rounded-br-[16px]"
-          >
-            <div class="flex items-center justify-between pb-[4px] border-b-[1px] border-gray">
-              <div class="flex items-center gap-[12px]">
-                <div class="w-[48px] h-[48px] rounded-full flex items-center justify-center bg-gray">
-                  <img class="w-full max-w-[36px]" src="@/assets/imgs/zara.svg" alt="" />
-                </div>
-                <p class="text-sm font-bold leading-[20px] text-black">ZARA</p>
-              </div>
-            </div>
-            <div class="w-full mt-[4px] flex gap-[4px] flex-col">
-              <p class="font-bold text-back text-sm leading-[20px]">15% {{ $t('off_discount_card') }}</p>
-              <p class="font-medium text-xs text-grayDark">46/50 {{ $t('pcs') }}</p>
-            </div>
-          </div>
-        </div>
-      </swiper-slide>
-      <swiper-slide>
-        <div class="relative w-full flex flex-col shadow-sm">
-          <div class="relative w-full lg:h-[315px] xl:h-[324px] 2xl:h-[382px] rounded-tl-[16px] rounded-tr-[16px] overflow-hidden">
-            <img class="w-full h-full object-cover" src="@/assets/imgs/item3.png" alt="" />
-            <div class="absolute w-full top-[12px] px-[12px] flex items-start justify-between">
-              <div class="date px-[8px] py-[4px] bg-white flex items-center justify-center rounded-[8px]">
-                <div class="flex flex-col items-center">
-                  <p class="text-sm font-bold text-black leading-[20px] lowercase">100 {{ $t('points') }}</p>
-                </div>
-              </div>
-              <Icon icon="solar:heart-outline" class="text-xl text-white" />
-            </div>
-          </div>
-          <div
-            class="w-full py-[12px] px-[16px] flex flex-col bg-white orange-border before:yellowLight after:bg-orange rounded-bl-[16px] rounded-br-[16px]"
-          >
-            <div class="flex items-center justify-between pb-[4px] border-b-[1px] border-gray">
-              <div class="flex items-center gap-[12px]">
-                <div class="w-[48px] h-[48px] rounded-full flex items-center justify-center bg-gray">
-                  <img class="w-full max-w-[36px]" src="@/assets/imgs/zara.svg" alt="" />
-                </div>
-                <p class="text-sm font-bold leading-[20px] text-black">ZARA</p>
-              </div>
-            </div>
-            <div class="w-full mt-[4px] flex gap-[4px] flex-col">
-              <p class="font-bold text-back text-sm leading-[20px]">15% {{ $t('off_discount_card') }}</p>
-              <p class="font-medium text-xs text-grayDark">46/50 {{ $t('pcs') }}</p>
-            </div>
-          </div>
-        </div>
-      </swiper-slide>
-      <swiper-slide>
-        <div class="relative w-full flex flex-col shadow-sm">
-          <div class="relative w-full lg:h-[315px] xl:h-[324px] 2xl:h-[382px] rounded-tl-[16px] rounded-tr-[16px] overflow-hidden">
-            <img class="w-full h-full object-cover" src="@/assets/imgs/item3.png" alt="" />
-            <div class="absolute w-full top-[12px] px-[12px] flex items-start justify-between">
-              <div class="date px-[8px] py-[4px] bg-white flex items-center justify-center rounded-[8px]">
-                <div class="flex flex-col items-center">
-                  <p class="text-sm font-bold text-black leading-[20px] lowercase">100 {{ $t('points') }}</p>
-                </div>
-              </div>
-              <Icon icon="solar:heart-outline" class="text-xl text-white" />
-            </div>
-          </div>
-          <div
-            class="w-full py-[12px] px-[16px] flex flex-col bg-white orange-border before:yellowLight after:bg-orange rounded-bl-[16px] rounded-br-[16px]"
-          >
-            <div class="flex items-center justify-between pb-[4px] border-b-[1px] border-gray">
-              <div class="flex items-center gap-[12px]">
-                <div class="w-[48px] h-[48px] rounded-full flex items-center justify-center bg-gray">
-                  <img class="w-full max-w-[36px]" src="@/assets/imgs/zara.svg" alt="" />
-                </div>
-                <p class="text-sm font-bold leading-[20px] text-black">ZARA</p>
-              </div>
-            </div>
-            <div class="w-full mt-[4px] flex gap-[4px] flex-col">
-              <p class="font-bold text-back text-sm leading-[20px]">15% {{ $t('off_discount_card') }}</p>
-              <p class="font-medium text-xs text-grayDark">46/50 {{ $t('pcs') }}</p>
-            </div>
-          </div>
-        </div>
-      </swiper-slide>
-      <swiper-slide>
-        <div class="relative w-full flex flex-col shadow-sm">
-          <div class="relative w-full lg:h-[315px] xl:h-[324px] 2xl:h-[382px] rounded-tl-[16px] rounded-tr-[16px] overflow-hidden">
-            <img class="w-full h-full object-cover" src="@/assets/imgs/item3.png" alt="" />
-            <div class="absolute w-full top-[12px] px-[12px] flex items-start justify-between">
-              <div class="date px-[8px] py-[4px] bg-white flex items-center justify-center rounded-[8px]">
-                <div class="flex flex-col items-center">
-                  <p class="text-sm font-bold text-black leading-[20px] lowercase">100 {{ $t('points') }}</p>
-                </div>
-              </div>
-              <Icon icon="solar:heart-outline" class="text-xl text-white" />
-            </div>
-          </div>
-          <div
-            class="w-full py-[12px] px-[16px] flex flex-col bg-white orange-border before:yellowLight after:bg-orange rounded-bl-[16px] rounded-br-[16px]"
-          >
-            <div class="flex items-center justify-between pb-[4px] border-b-[1px] border-gray">
-              <div class="flex items-center gap-[12px]">
-                <div class="w-[48px] h-[48px] rounded-full flex items-center justify-center bg-gray">
-                  <img class="w-full max-w-[36px]" src="@/assets/imgs/zara.svg" alt="" />
-                </div>
-                <p class="text-sm font-bold leading-[20px] text-black">ZARA</p>
-              </div>
-            </div>
-            <div class="w-full mt-[4px] flex gap-[4px] flex-col">
-              <p class="font-bold text-back text-sm leading-[20px]">15% {{ $t('off_discount_card') }}</p>
-              <p class="font-medium text-xs text-grayDark">46/50 {{ $t('pcs') }}</p>
-            </div>
-          </div>
-        </div>
-      </swiper-slide>
-      <swiper-slide>
-        <div class="relative w-full flex flex-col shadow-sm">
-          <div class="relative w-full lg:h-[315px] xl:h-[324px] 2xl:h-[382px] rounded-tl-[16px] rounded-tr-[16px] overflow-hidden">
-            <img class="w-full h-full object-cover" src="@/assets/imgs/item3.png" alt="" />
-            <div class="absolute w-full top-[12px] px-[12px] flex items-start justify-between">
-              <div class="date px-[8px] py-[4px] bg-white flex items-center justify-center rounded-[8px]">
-                <div class="flex flex-col items-center">
-                  <p class="text-sm font-bold text-black leading-[20px] lowercase">100 {{ $t('points') }}</p>
-                </div>
-              </div>
-              <Icon icon="solar:heart-outline" class="text-xl text-white" />
-            </div>
-          </div>
-          <div
-            class="w-full py-[12px] px-[16px] flex flex-col bg-white orange-border before:yellowLight after:bg-orange rounded-bl-[16px] rounded-br-[16px]"
-          >
-            <div class="flex items-center justify-between pb-[4px] border-b-[1px] border-gray">
-              <div class="flex items-center gap-[12px]">
-                <div class="w-[48px] h-[48px] rounded-full flex items-center justify-center bg-gray">
-                  <img class="w-full max-w-[36px]" src="@/assets/imgs/zara.svg" alt="" />
-                </div>
-                <p class="text-sm font-bold leading-[20px] text-black">ZARA</p>
-              </div>
-            </div>
-            <div class="w-full mt-[4px] flex gap-[4px] flex-col">
-              <p class="font-bold text-back text-sm leading-[20px]">15% {{ $t('off_discount_card') }}</p>
-              <p class="font-medium text-xs text-grayDark">46/50 {{ $t('pcs') }}</p>
-            </div>
-          </div>
-        </div>
-      </swiper-slide>
-      <swiper-slide>
-        <div class="relative w-full flex flex-col shadow-sm">
-          <div class="relative w-full lg:h-[315px] xl:h-[324px] 2xl:h-[382px] rounded-tl-[16px] rounded-tr-[16px] overflow-hidden">
-            <img class="w-full h-full object-cover" src="@/assets/imgs/item3.png" alt="" />
-            <div class="absolute w-full top-[12px] px-[12px] flex items-start justify-between">
-              <div class="date px-[8px] py-[4px] bg-white flex items-center justify-center rounded-[8px]">
-                <div class="flex flex-col items-center">
-                  <p class="text-sm font-bold text-black leading-[20px] lowercase">100 {{ $t('points') }}</p>
-                </div>
-              </div>
-              <Icon icon="solar:heart-outline" class="text-xl text-white" />
-            </div>
-          </div>
-          <div
-            class="w-full py-[12px] px-[16px] flex flex-col bg-white orange-border before:yellowLight after:bg-orange rounded-bl-[16px] rounded-br-[16px]"
-          >
-            <div class="flex items-center justify-between pb-[4px] border-b-[1px] border-gray">
-              <div class="flex items-center gap-[12px]">
-                <div class="w-[48px] h-[48px] rounded-full flex items-center justify-center bg-gray">
-                  <img class="w-full max-w-[36px]" src="@/assets/imgs/zara.svg" alt="" />
-                </div>
-                <p class="text-sm font-bold leading-[20px] text-black">ZARA</p>
-              </div>
-            </div>
-            <div class="w-full mt-[4px] flex gap-[4px] flex-col">
-              <p class="font-bold text-back text-sm leading-[20px]">15% {{ $t('off_discount_card') }}</p>
-              <p class="font-medium text-xs text-grayDark">46/50 {{ $t('pcs') }}</p>
-            </div>
-          </div>
-        </div>
-      </swiper-slide>
-      <swiper-slide>
-        <div class="relative w-full flex flex-col shadow-sm">
-          <div class="relative w-full lg:h-[315px] xl:h-[324px] 2xl:h-[382px] rounded-tl-[16px] rounded-tr-[16px] overflow-hidden">
-            <img class="w-full h-full object-cover" src="@/assets/imgs/item3.png" alt="" />
-            <div class="absolute w-full top-[12px] px-[12px] flex items-start justify-between">
-              <div class="date px-[8px] py-[4px] bg-white flex items-center justify-center rounded-[8px]">
-                <div class="flex flex-col items-center">
-                  <p class="text-sm font-bold text-black leading-[20px] lowercase">100 {{ $t('points') }}</p>
-                </div>
-              </div>
-              <Icon icon="solar:heart-outline" class="text-xl text-white" />
-            </div>
-          </div>
-          <div
-            class="w-full py-[12px] px-[16px] flex flex-col bg-white orange-border before:yellowLight after:bg-orange rounded-bl-[16px] rounded-br-[16px]"
-          >
-            <div class="flex items-center justify-between pb-[4px] border-b-[1px] border-gray">
-              <div class="flex items-center gap-[12px]">
-                <div class="w-[48px] h-[48px] rounded-full flex items-center justify-center bg-gray">
-                  <img class="w-full max-w-[36px]" src="@/assets/imgs/zara.svg" alt="" />
-                </div>
-                <p class="text-sm font-bold leading-[20px] text-black">ZARA</p>
-              </div>
-            </div>
-            <div class="w-full mt-[4px] flex gap-[4px] flex-col">
-              <p class="font-bold text-back text-sm leading-[20px]">15% {{ $t('off_discount_card') }}</p>
-              <p class="font-medium text-xs text-grayDark">46/50 {{ $t('pcs') }}</p>
-            </div>
-          </div>
-        </div>
-      </swiper-slide>
-      <swiper-slide>
-        <div class="relative w-full flex flex-col shadow-sm">
-          <div class="relative w-full lg:h-[315px] xl:h-[324px] 2xl:h-[382px] rounded-tl-[16px] rounded-tr-[16px] overflow-hidden">
-            <img class="w-full h-full object-cover" src="@/assets/imgs/item3.png" alt="" />
-            <div class="absolute w-full top-[12px] px-[12px] flex items-start justify-between">
-              <div class="date px-[8px] py-[4px] bg-white flex items-center justify-center rounded-[8px]">
-                <div class="flex flex-col items-center">
-                  <p class="text-sm font-bold text-black leading-[20px] lowercase">100 {{ $t('points') }}</p>
-                </div>
-              </div>
-              <Icon icon="solar:heart-outline" class="text-xl text-white" />
-            </div>
-          </div>
-          <div
-            class="w-full py-[12px] px-[16px] flex flex-col bg-white orange-border before:yellowLight after:bg-orange rounded-bl-[16px] rounded-br-[16px]"
-          >
-            <div class="flex items-center justify-between pb-[4px] border-b-[1px] border-gray">
-              <div class="flex items-center gap-[12px]">
-                <div class="w-[48px] h-[48px] rounded-full flex items-center justify-center bg-gray">
-                  <img class="w-full max-w-[36px]" src="@/assets/imgs/zara.svg" alt="" />
-                </div>
-                <p class="text-sm font-bold leading-[20px] text-black">ZARA</p>
+                <p class="text-sm font-bold leading-[20px] text-black">{{ item.title }}</p>
               </div>
             </div>
             <div class="w-full mt-[4px] flex gap-[4px] flex-col">
@@ -1533,13 +1290,15 @@
       >
         <swiper-slide v-for="(slide, index) in groupedCompanies" :key="index">
           <div class="item w-full gap-[24px] grid grid-rows-2 col2-slider">
-            <div v-for="(company, itemIndex) in slide" :key="itemIndex"
+            <div
+              v-for="(company, itemIndex) in slide"
+              :key="itemIndex"
               class="relative w-full h-[150px] items-center justify-center border-[1px] border-graylight rounded-[16px] flex flex-col shadow-sm"
             >
               <img class="max-w-[80px] w-full object-cover" :src="company.logo_picture" alt="" />
             </div>
           </div>
-        </swiper-slide>   
+        </swiper-slide>
       </SliderComponentVue>
     </div>
 
@@ -1841,11 +1600,12 @@
 </template>
 
 <script lang="ts">
+import { useFormatDate } from '@/composables/useDateFormat'
 import { useNewsStore, NewsData } from '@/stores/news/news'
 import { useUpcomingEventsStore, UpcomingEventsData } from '@/stores/upcoming-events/upcoming-events'
 import { useCompaniesStore, CompaniesData } from '@/stores/companies/companies'
-import { Pagination } from 'swiper'
-import { Navigation } from 'swiper'
+import { useRewardsStore, RewardsData } from '@/stores/rewards/rewards'
+import { Pagination, Navigation } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
 import 'swiper/css/pagination'
@@ -1870,8 +1630,14 @@ export default {
       accountSetup: false as boolean,
       newsData: null as NewsData['data'],
       upcomingEventsData: null as UpcomingEventsData['data'],
-      companiesData: null as CompaniesData['data']
+      companiesData: null as CompaniesData['data'],
+      rewardsData: null as RewardsData['data'],
+      formatDate: null
     }
+  },
+  created() {
+    const {formatDate} = useFormatDate()
+    this.formatDate = formatDate
   },
   components: {
     HeaderComponent,
@@ -1935,57 +1701,18 @@ export default {
       const companiesStore = useCompaniesStore()
       await companiesStore.fetchCompanies()
       this.companiesData = companiesStore.data
-    },    
+    },
+    async fetchRewards() {
+      const rewardsStore = useRewardsStore()
+      await rewardsStore.fetchRewards()
+      this.rewardsData = rewardsStore.data
+    },
     async fetchAllSliderItems() {
       this.fetchNews()
       this.fetchUpcomingEvents()
       this.fetchCompanies()
-    },
-    formatDate(data: Record<string, any> | null, dateName: string) {
-      if (!Array.isArray(data)) {
-        return []
-      }
-      const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-      if (dateName === 'publish_at') {
-        return data.map(newsItem => {
-          if (newsItem.publish_at) {
-            const [datePart, timePart] = newsItem.publish_at.split(' ')
-            const [year, month, day] = datePart.split('-')
-            const formattedDate = `${day} ${monthNames[parseInt(month) - 1]} ${year}`
-
-            const rawTime = timePart.substring(0, 5) // Extract the first 5 characters for time (HH:mm)
-            const [hour, minute] = rawTime.split(':')
-            const ampm = parseInt(hour) >= 12 ? 'PM' : 'AM'
-            const formattedHour = (parseInt(hour) % 12).toString().padStart(2, '0') || '12'
-            const formattedMinute = minute.padStart(2, '0')
-            const formattedTime = `${formattedHour}:${formattedMinute} ${ampm}`
-
-            return { formattedDate, day, month: monthNames[parseInt(month) - 1], year, formattedTime }
-          }
-
-          return { formattedDate: '', day: '', month: '', year: '', formattedTime: '' }
-        })
-      }
-      if (dateName === 'start') {
-        return data.map(newsItem => {
-          if (newsItem.start) {
-            const [datePart, timePart] = newsItem.start.split(' ')
-            const [year, month, day] = datePart.split('-')
-            const formattedDate = `${day} ${monthNames[parseInt(month) - 1]} ${year}`
-
-            const rawTime = timePart.substring(0, 5) // Extract the first 5 characters for time (HH:mm)
-            const [hour, minute] = rawTime.split(':')
-            const ampm = parseInt(hour) >= 12 ? 'PM' : 'AM'
-            const formattedHour = (parseInt(hour) % 12).toString().padStart(2, '0') || '12'
-            const formattedMinute = minute.padStart(2, '0')
-            const formattedTime = `${formattedHour}:${formattedMinute} ${ampm}`
-
-            return { formattedDate, day, month: monthNames[parseInt(month) - 1], year, formattedTime }
-          }
-          return { formattedDate: '', day: '', month: '', year: '', formattedTime: '' }
-        })
-      }
-    },
+      this.fetchRewards()
+    },    
     closeTurnonNotifications() {
       this.turnOnNotifications = false
     },
@@ -1994,25 +1721,25 @@ export default {
     }
   },
   computed: {
-    newsDDMMYY(): string[] {
-      return this.formatDate(this.newsData, 'publish_at')
-    },
-    eventsDDMMYY(): string[] {
-      return this.formatDate(this.upcomingEventsData, 'start')
-    },
+    // newsDDMMYY(): string[] {
+    //   return this.formatDate(this.newsData, 'publish_at')
+    // },
+    // eventsDDMMYY(): string[] {
+    //   return this.formatDate(this.upcomingEventsData, 'start')
+    // },
     groupedCompanies() {
-      const grouped = [];
-      if(this.compainesData) {
+      const grouped = []
+      if (this.companiesData) {
         for (let i = 0; i < this.companiesData.length; i += 2) {
           if (i + 1 < this.companiesData.length) {
-            grouped.push([this.companiesData[i], this.companiesData[i + 1]]);
+            grouped.push([this.companiesData[i], this.companiesData[i + 1]])
           } else {
-            grouped.push([this.companiesData[i]]);
+            grouped.push([this.companiesData[i]])
           }
         }
-          return grouped;
-        }
+        return grouped
       }
+    }
   }
 }
 </script>
