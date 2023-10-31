@@ -337,29 +337,29 @@ export default {
       }
 
       if (this.readyForSubmit) {
-        const auth = getAuth()
-        const email = this.userData.email
-        const password = this.userData.password        
-        createUserWithEmailAndPassword(auth, email, password)
-          .then((userCredential) => {            
-            // Registeration successful
-            const userData = {
-              email: userCredential.user.email,
-              name: this.userData.name,
-              surname: this.userData.surname,
-              token: userCredential.user.getIdToken()
-            }
-            console.log('userData => ', userData)
-            axios.post('/api/web-app/register', userData)
-              .then((response) => {
-                console.log(response)
-              })
-              .catch((error) => console.log(error))
-            this.$emit('emailVerification')
-          })
-          .catch((error) => {
-            console.log('Registeration error: ', error)
-          })
+        // const auth = getAuth()
+        // const email = this.userData.email
+        // const password = this.userData.password        
+        // createUserWithEmailAndPassword(auth, email, password)
+        //   .then((userCredential) => {            
+        //     // Registeration successful
+        //     const userData = {
+        //       email: userCredential.user.email,
+        //       name: this.userData.name,
+        //       surname: this.userData.surname,
+        //       token: userCredential.user.getIdToken()
+        //     }
+        //     console.log('userData => ', userData)
+        //     axios.post('/api/web-app/register', userData)
+        //       .then((response) => {
+        //         console.log(response)
+        //       })
+        //       .catch((error) => console.log(error))
+        //     this.$emit('emailVerification')
+        //   })
+        //   .catch((error) => {
+        //     console.log('Registeration error: ', error)
+        //   })
         
       }
     }

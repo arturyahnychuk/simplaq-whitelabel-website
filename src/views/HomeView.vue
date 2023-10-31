@@ -38,11 +38,10 @@
               <div class="date w-[39px] h-[42px] bg-white flex items-center justify-center rounded-[8px]">
                 <div class="flex flex-col items-center">
                   <p class="text-sm font-bold text-black leading-[20px]">
-                  {{ formatDate(item.start).day }}
+                    {{ formatDate(item.start).day }}
                   </p>
                   <p class="text-s font-medium text-grayDark">
                     {{ formatDate(item.start).month }}
-
                   </p>
                 </div>
               </div>
@@ -55,7 +54,9 @@
                 <div class="min-w-[48px] min-h-[48px] w-[48px] h-[48px] rounded-full flex items-center justify-center bg-gray">
                   <img class="w-full rounded-full" :src="item.picture_link" alt="" />
                 </div>
-                <p class="text-sm font-bold leading-[20px] text-black break-all">{{ item.title.length > 16 ? item.title.slice(0, 16) + '...' : item.title }}</p>
+                <p class="text-sm font-bold leading-[20px] text-black break-all">
+                  {{ truncateText(item.title, 12) }}
+                </p>
               </div>
               <div class="flex items-center gap-[8px]">
                 <p class="text-sm font-medium text-black leading-[20px] tracking-[-0.2px]">{{ $t('free') }}</p>
@@ -269,16 +270,15 @@
           </div>
         </div>
       </swiper-slide>
-
-      <swiper-slide>
+      <swiper-slide v-for="(item, index) in offersData" :key="index">
         <div class="relative w-full flex flex-col shadow-sm">
           <div
             class="relative w-full h-[160px] sm:h-[276px] md:h-[224px] lg:h-[232px] xl:h-[210px] 2xl:h-[247px] rounded-tl-[16px] rounded-tr-[16px] overflow-hidden bg-gray flex items-center justify-center px-[20px]"
           >
             <img
               class="max-w-[76px] sm:w-[131px] md:max-w-[106px] lg:max-w-[110px] xl:max-w-[100px] 2xl:max-w-[117px] w-full object-cover"
-              src="@/assets/imgs/shirt.png"
-              alt=""
+              :src="item.picture_link"
+              :alt="item.name"
             />
 
             <div class="absolute w-full top-[12px] px-[12px] flex items-start justify-between">
@@ -296,7 +296,7 @@
                 <div class="w-[48px] h-[48px] rounded-full flex items-center justify-center bg-gray">
                   <img class="w-full max-w-[36px]" src="@/assets/imgs/stores.svg" alt="" />
                 </div>
-                <p class="text-sm font-bold leading-[20px] sm:block hidden text-black">Pull&Bear</p>
+                <p class="text-sm font-bold leading-[20px] sm:block hidden text-black">{{ item.name }}</p>
               </div>
               <div class="flex items-center gap-[8px]">
                 <div
@@ -308,549 +308,10 @@
             </div>
             <div class="w-full mt-[4px]">
               <div class="flex flex-col gap-[8px]">
-                <p class="font-bold text-back text-sm leading-[20px]">Pull&Bear shrimp T-shirt</p>
+                <p class="font-bold text-back text-sm leading-[20px]">{{ item.description }}</p>
                 <div class="flex flex-col">
                   <p class="text-grayDark font-semibold text-xs leading-[16px] previous-price before:bg-black tracking-[-0.1px]">$69.90</p>
-                  <p class="text-black font-bold teext-[18px] leading-[26px] tracking-[-0.1px]">$49.00</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </swiper-slide>
-
-      <swiper-slide>
-        <div class="relative w-full flex flex-col shadow-sm">
-          <div
-            class="relative w-full h-[160px] sm:h-[276px] md:h-[224px] lg:h-[232px] xl:h-[210px] 2xl:h-[247px] rounded-tl-[16px] rounded-tr-[16px] overflow-hidden bg-gray flex items-center justify-center px-[20px]"
-          >
-            <img
-              class="max-w-[76px] sm:w-[131px] md:max-w-[106px] lg:max-w-[110px] xl:max-w-[100px] 2xl:max-w-[117px] w-full object-cover"
-              src="@/assets/imgs/shirt.png"
-              alt=""
-            />
-
-            <div class="absolute w-full top-[12px] px-[12px] flex items-start justify-between">
-              <div class="date w-max px-[8px] py-[4px] bg-gray flex items-center justify-center rounded-[8px]">
-                <div class="flex flex-col items-center">
-                  <p class="text-sm font-bold text-black leading-[20px] tracking-[-0.2px]">02:10:54</p>
-                </div>
-              </div>
-              <Icon icon="solar:heart-outline" class="text-xl text-black" />
-            </div>
-          </div>
-          <div class="w-full py-[12px] px-[16px] flex flex-col bg-white rounded-bl-[16px] rounded-br-[16px]">
-            <div class="flex items-center justify-between pb-[4px] border-b-[1px] border-gray">
-              <div class="flex items-center gap-[12px]">
-                <div class="w-[48px] h-[48px] rounded-full flex items-center justify-center bg-gray">
-                  <img class="w-full max-w-[36px]" src="@/assets/imgs/stores.svg" alt="" />
-                </div>
-                <p class="text-sm font-bold leading-[20px] sm:block hidden text-black">Pull&Bear</p>
-              </div>
-              <div class="flex items-center gap-[8px]">
-                <div
-                  class="py-[6px] px-[8px] bg-greenLight rounded-[8px] text-green font-semibold text-sm leading-[20px] tracking-[-0.2px]"
-                >
-                  -30%
-                </div>
-              </div>
-            </div>
-            <div class="w-full mt-[4px]">
-              <div class="flex flex-col gap-[8px]">
-                <p class="font-bold text-back text-sm leading-[20px]">Pull&Bear shrimp T-shirt</p>
-                <div class="flex flex-col">
-                  <p class="text-grayDark font-semibold text-xs leading-[16px] previous-price before:bg-black tracking-[-0.1px]">$69.90</p>
-                  <p class="text-black font-bold teext-[18px] leading-[26px] tracking-[-0.1px]">$49.00</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </swiper-slide>
-
-      <swiper-slide>
-        <div class="relative w-full flex flex-col shadow-sm">
-          <div
-            class="relative w-full h-[160px] sm:h-[276px] md:h-[224px] lg:h-[232px] xl:h-[210px] 2xl:h-[247px] rounded-tl-[16px] rounded-tr-[16px] overflow-hidden bg-gray flex items-center justify-center px-[20px]"
-          >
-            <img
-              class="max-w-[76px] sm:w-[131px] md:max-w-[106px] lg:max-w-[110px] xl:max-w-[100px] 2xl:max-w-[117px] w-full object-cover"
-              src="@/assets/imgs/shirt.png"
-              alt=""
-            />
-
-            <div class="absolute w-full top-[12px] px-[12px] flex items-start justify-between">
-              <div class="date w-max px-[8px] py-[4px] bg-gray flex items-center justify-center rounded-[8px]">
-                <div class="flex flex-col items-center">
-                  <p class="text-sm font-bold text-black leading-[20px] tracking-[-0.2px]">02:10:54</p>
-                </div>
-              </div>
-              <Icon icon="solar:heart-outline" class="text-xl text-black" />
-            </div>
-          </div>
-          <div class="w-full py-[12px] px-[16px] flex flex-col bg-white rounded-bl-[16px] rounded-br-[16px]">
-            <div class="flex items-center justify-between pb-[4px] border-b-[1px] border-gray">
-              <div class="flex items-center gap-[12px]">
-                <div class="w-[48px] h-[48px] rounded-full flex items-center justify-center bg-gray">
-                  <img class="w-full max-w-[36px]" src="@/assets/imgs/stores.svg" alt="" />
-                </div>
-                <p class="text-sm font-bold leading-[20px] sm:block hidden text-black">Pull&Bear</p>
-              </div>
-              <div class="flex items-center gap-[8px]">
-                <div
-                  class="py-[6px] px-[8px] bg-greenLight rounded-[8px] text-green font-semibold text-sm leading-[20px] tracking-[-0.2px]"
-                >
-                  -30%
-                </div>
-              </div>
-            </div>
-            <div class="w-full mt-[4px]">
-              <div class="flex flex-col gap-[8px]">
-                <p class="font-bold text-back text-sm leading-[20px]">Pull&Bear shrimp T-shirt</p>
-                <div class="flex flex-col">
-                  <p class="text-grayDark font-semibold text-xs leading-[16px] previous-price before:bg-black tracking-[-0.1px]">$69.90</p>
-                  <p class="text-black font-bold teext-[18px] leading-[26px] tracking-[-0.1px]">$49.00</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </swiper-slide>
-
-      <swiper-slide>
-        <div class="relative w-full flex flex-col shadow-sm">
-          <div
-            class="relative w-full h-[160px] sm:h-[276px] md:h-[224px] lg:h-[232px] xl:h-[210px] 2xl:h-[247px] rounded-tl-[16px] rounded-tr-[16px] overflow-hidden bg-gray flex items-center justify-center px-[20px]"
-          >
-            <img
-              class="max-w-[76px] sm:w-[131px] md:max-w-[106px] lg:max-w-[110px] xl:max-w-[100px] 2xl:max-w-[117px] w-full object-cover"
-              src="@/assets/imgs/shirt.png"
-              alt=""
-            />
-
-            <div class="absolute w-full top-[12px] px-[12px] flex items-start justify-between">
-              <div class="date w-max px-[8px] py-[4px] bg-gray flex items-center justify-center rounded-[8px]">
-                <div class="flex flex-col items-center">
-                  <p class="text-sm font-bold text-black leading-[20px] tracking-[-0.2px]">02:10:54</p>
-                </div>
-              </div>
-              <Icon icon="solar:heart-outline" class="text-xl text-black" />
-            </div>
-          </div>
-          <div class="w-full py-[12px] px-[16px] flex flex-col bg-white rounded-bl-[16px] rounded-br-[16px]">
-            <div class="flex items-center justify-between pb-[4px] border-b-[1px] border-gray">
-              <div class="flex items-center gap-[12px]">
-                <div class="w-[48px] h-[48px] rounded-full flex items-center justify-center bg-gray">
-                  <img class="w-full max-w-[36px]" src="@/assets/imgs/stores.svg" alt="" />
-                </div>
-                <p class="text-sm font-bold leading-[20px] sm:block hidden text-black">Pull&Bear</p>
-              </div>
-              <div class="flex items-center gap-[8px]">
-                <div
-                  class="py-[6px] px-[8px] bg-greenLight rounded-[8px] text-green font-semibold text-sm leading-[20px] tracking-[-0.2px]"
-                >
-                  -30%
-                </div>
-              </div>
-            </div>
-            <div class="w-full mt-[4px]">
-              <div class="flex flex-col gap-[8px]">
-                <p class="font-bold text-back text-sm leading-[20px]">Pull&Bear shrimp T-shirt</p>
-                <div class="flex flex-col">
-                  <p class="text-grayDark font-semibold text-xs leading-[16px] previous-price before:bg-black tracking-[-0.1px]">$69.90</p>
-                  <p class="text-black font-bold teext-[18px] leading-[26px] tracking-[-0.1px]">$49.00</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </swiper-slide>
-
-      <swiper-slide>
-        <div class="relative w-full flex flex-col shadow-sm">
-          <div
-            class="relative w-full h-[160px] sm:h-[276px] md:h-[224px] lg:h-[232px] xl:h-[210px] 2xl:h-[247px] rounded-tl-[16px] rounded-tr-[16px] overflow-hidden bg-gray flex items-center justify-center px-[20px]"
-          >
-            <img
-              class="max-w-[76px] sm:w-[131px] md:max-w-[106px] lg:max-w-[110px] xl:max-w-[100px] 2xl:max-w-[117px] w-full object-cover"
-              src="@/assets/imgs/shirt.png"
-              alt=""
-            />
-
-            <div class="absolute w-full top-[12px] px-[12px] flex items-start justify-between">
-              <div class="date w-max px-[8px] py-[4px] bg-gray flex items-center justify-center rounded-[8px]">
-                <div class="flex flex-col items-center">
-                  <p class="text-sm font-bold text-black leading-[20px] tracking-[-0.2px]">02:10:54</p>
-                </div>
-              </div>
-              <Icon icon="solar:heart-outline" class="text-xl text-black" />
-            </div>
-          </div>
-          <div class="w-full py-[12px] px-[16px] flex flex-col bg-white rounded-bl-[16px] rounded-br-[16px]">
-            <div class="flex items-center justify-between pb-[4px] border-b-[1px] border-gray">
-              <div class="flex items-center gap-[12px]">
-                <div class="w-[48px] h-[48px] rounded-full flex items-center justify-center bg-gray">
-                  <img class="w-full max-w-[36px]" src="@/assets/imgs/stores.svg" alt="" />
-                </div>
-                <p class="text-sm font-bold leading-[20px] sm:block hidden text-black">Pull&Bear</p>
-              </div>
-              <div class="flex items-center gap-[8px]">
-                <div
-                  class="py-[6px] px-[8px] bg-greenLight rounded-[8px] text-green font-semibold text-sm leading-[20px] tracking-[-0.2px]"
-                >
-                  -30%
-                </div>
-              </div>
-            </div>
-            <div class="w-full mt-[4px]">
-              <div class="flex flex-col gap-[8px]">
-                <p class="font-bold text-back text-sm leading-[20px]">Pull&Bear shrimp T-shirt</p>
-                <div class="flex flex-col">
-                  <p class="text-grayDark font-semibold text-xs leading-[16px] previous-price before:bg-black tracking-[-0.1px]">$69.90</p>
-                  <p class="text-black font-bold teext-[18px] leading-[26px] tracking-[-0.1px]">$49.00</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </swiper-slide>
-
-      <swiper-slide>
-        <div class="relative w-full flex flex-col shadow-sm">
-          <div
-            class="relative w-full h-[160px] sm:h-[276px] md:h-[224px] lg:h-[232px] xl:h-[210px] 2xl:h-[247px] rounded-tl-[16px] rounded-tr-[16px] overflow-hidden bg-gray flex items-center justify-center px-[20px]"
-          >
-            <img
-              class="max-w-[76px] sm:w-[131px] md:max-w-[106px] lg:max-w-[110px] xl:max-w-[100px] 2xl:max-w-[117px] w-full object-cover"
-              src="@/assets/imgs/shirt.png"
-              alt=""
-            />
-
-            <div class="absolute w-full top-[12px] px-[12px] flex items-start justify-between">
-              <div class="date w-max px-[8px] py-[4px] bg-gray flex items-center justify-center rounded-[8px]">
-                <div class="flex flex-col items-center">
-                  <p class="text-sm font-bold text-black leading-[20px] tracking-[-0.2px]">02:10:54</p>
-                </div>
-              </div>
-              <Icon icon="solar:heart-outline" class="text-xl text-black" />
-            </div>
-          </div>
-          <div class="w-full py-[12px] px-[16px] flex flex-col bg-white rounded-bl-[16px] rounded-br-[16px]">
-            <div class="flex items-center justify-between pb-[4px] border-b-[1px] border-gray">
-              <div class="flex items-center gap-[12px]">
-                <div class="w-[48px] h-[48px] rounded-full flex items-center justify-center bg-gray">
-                  <img class="w-full max-w-[36px]" src="@/assets/imgs/stores.svg" alt="" />
-                </div>
-                <p class="text-sm font-bold leading-[20px] sm:block hidden text-black">Pull&Bear</p>
-              </div>
-              <div class="flex items-center gap-[8px]">
-                <div
-                  class="py-[6px] px-[8px] bg-greenLight rounded-[8px] text-green font-semibold text-sm leading-[20px] tracking-[-0.2px]"
-                >
-                  -30%
-                </div>
-              </div>
-            </div>
-            <div class="w-full mt-[4px]">
-              <div class="flex flex-col gap-[8px]">
-                <p class="font-bold text-back text-sm leading-[20px]">Pull&Bear shrimp T-shirt</p>
-                <div class="flex flex-col">
-                  <p class="text-grayDark font-semibold text-xs leading-[16px] previous-price before:bg-black tracking-[-0.1px]">$69.90</p>
-                  <p class="text-black font-bold teext-[18px] leading-[26px] tracking-[-0.1px]">$49.00</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </swiper-slide>
-
-      <swiper-slide>
-        <div class="relative w-full flex flex-col shadow-sm">
-          <div
-            class="relative w-full h-[160px] sm:h-[276px] md:h-[224px] lg:h-[232px] xl:h-[210px] 2xl:h-[247px] rounded-tl-[16px] rounded-tr-[16px] overflow-hidden bg-gray flex items-center justify-center px-[20px]"
-          >
-            <img
-              class="max-w-[76px] sm:w-[131px] md:max-w-[106px] lg:max-w-[110px] xl:max-w-[100px] 2xl:max-w-[117px] w-full object-cover"
-              src="@/assets/imgs/shirt.png"
-              alt=""
-            />
-
-            <div class="absolute w-full top-[12px] px-[12px] flex items-start justify-between">
-              <div class="date w-max px-[8px] py-[4px] bg-gray flex items-center justify-center rounded-[8px]">
-                <div class="flex flex-col items-center">
-                  <p class="text-sm font-bold text-black leading-[20px] tracking-[-0.2px]">02:10:54</p>
-                </div>
-              </div>
-              <Icon icon="solar:heart-outline" class="text-xl text-black" />
-            </div>
-          </div>
-          <div class="w-full py-[12px] px-[16px] flex flex-col bg-white rounded-bl-[16px] rounded-br-[16px]">
-            <div class="flex items-center justify-between pb-[4px] border-b-[1px] border-gray">
-              <div class="flex items-center gap-[12px]">
-                <div class="w-[48px] h-[48px] rounded-full flex items-center justify-center bg-gray">
-                  <img class="w-full max-w-[36px]" src="@/assets/imgs/stores.svg" alt="" />
-                </div>
-                <p class="text-sm font-bold leading-[20px] sm:block hidden text-black">Pull&Bear</p>
-              </div>
-              <div class="flex items-center gap-[8px]">
-                <div
-                  class="py-[6px] px-[8px] bg-greenLight rounded-[8px] text-green font-semibold text-sm leading-[20px] tracking-[-0.2px]"
-                >
-                  -30%
-                </div>
-              </div>
-            </div>
-            <div class="w-full mt-[4px]">
-              <div class="flex flex-col gap-[8px]">
-                <p class="font-bold text-back text-sm leading-[20px]">Pull&Bear shrimp T-shirt</p>
-                <div class="flex flex-col">
-                  <p class="text-grayDark font-semibold text-xs leading-[16px] previous-price before:bg-black tracking-[-0.1px]">$69.90</p>
-                  <p class="text-black font-bold teext-[18px] leading-[26px] tracking-[-0.1px]">$49.00</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </swiper-slide>
-
-      <swiper-slide>
-        <div class="relative w-full flex flex-col shadow-sm">
-          <div
-            class="relative w-full h-[160px] sm:h-[276px] md:h-[224px] lg:h-[232px] xl:h-[210px] 2xl:h-[247px] rounded-tl-[16px] rounded-tr-[16px] overflow-hidden bg-gray flex items-center justify-center px-[20px]"
-          >
-            <img
-              class="max-w-[76px] sm:w-[131px] md:max-w-[106px] lg:max-w-[110px] xl:max-w-[100px] 2xl:max-w-[117px] w-full object-cover"
-              src="@/assets/imgs/shirt.png"
-              alt=""
-            />
-
-            <div class="absolute w-full top-[12px] px-[12px] flex items-start justify-between">
-              <div class="date w-max px-[8px] py-[4px] bg-gray flex items-center justify-center rounded-[8px]">
-                <div class="flex flex-col items-center">
-                  <p class="text-sm font-bold text-black leading-[20px] tracking-[-0.2px]">02:10:54</p>
-                </div>
-              </div>
-              <Icon icon="solar:heart-outline" class="text-xl text-black" />
-            </div>
-          </div>
-          <div class="w-full py-[12px] px-[16px] flex flex-col bg-white rounded-bl-[16px] rounded-br-[16px]">
-            <div class="flex items-center justify-between pb-[4px] border-b-[1px] border-gray">
-              <div class="flex items-center gap-[12px]">
-                <div class="w-[48px] h-[48px] rounded-full flex items-center justify-center bg-gray">
-                  <img class="w-full max-w-[36px]" src="@/assets/imgs/stores.svg" alt="" />
-                </div>
-                <p class="text-sm font-bold leading-[20px] sm:block hidden text-black">Pull&Bear</p>
-              </div>
-              <div class="flex items-center gap-[8px]">
-                <div
-                  class="py-[6px] px-[8px] bg-greenLight rounded-[8px] text-green font-semibold text-sm leading-[20px] tracking-[-0.2px]"
-                >
-                  -30%
-                </div>
-              </div>
-            </div>
-            <div class="w-full mt-[4px]">
-              <div class="flex flex-col gap-[8px]">
-                <p class="font-bold text-back text-sm leading-[20px]">Pull&Bear shrimp T-shirt</p>
-                <div class="flex flex-col">
-                  <p class="text-grayDark font-semibold text-xs leading-[16px] previous-price before:bg-black tracking-[-0.1px]">$69.90</p>
-                  <p class="text-black font-bold teext-[18px] leading-[26px] tracking-[-0.1px]">$49.00</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </swiper-slide>
-
-      <swiper-slide>
-        <div class="relative w-full flex flex-col shadow-sm">
-          <div
-            class="relative w-full h-[160px] sm:h-[276px] md:h-[224px] lg:h-[232px] xl:h-[210px] 2xl:h-[247px] rounded-tl-[16px] rounded-tr-[16px] overflow-hidden bg-gray flex items-center justify-center px-[20px]"
-          >
-            <img
-              class="max-w-[76px] sm:w-[131px] md:max-w-[106px] lg:max-w-[110px] xl:max-w-[100px] 2xl:max-w-[117px] w-full object-cover"
-              src="@/assets/imgs/shirt.png"
-              alt=""
-            />
-
-            <div class="absolute w-full top-[12px] px-[12px] flex items-start justify-between">
-              <div class="date w-max px-[8px] py-[4px] bg-gray flex items-center justify-center rounded-[8px]">
-                <div class="flex flex-col items-center">
-                  <p class="text-sm font-bold text-black leading-[20px] tracking-[-0.2px]">02:10:54</p>
-                </div>
-              </div>
-              <Icon icon="solar:heart-outline" class="text-xl text-black" />
-            </div>
-          </div>
-          <div class="w-full py-[12px] px-[16px] flex flex-col bg-white rounded-bl-[16px] rounded-br-[16px]">
-            <div class="flex items-center justify-between pb-[4px] border-b-[1px] border-gray">
-              <div class="flex items-center gap-[12px]">
-                <div class="w-[48px] h-[48px] rounded-full flex items-center justify-center bg-gray">
-                  <img class="w-full max-w-[36px]" src="@/assets/imgs/stores.svg" alt="" />
-                </div>
-                <p class="text-sm font-bold leading-[20px] sm:block hidden text-black">Pull&Bear</p>
-              </div>
-              <div class="flex items-center gap-[8px]">
-                <div
-                  class="py-[6px] px-[8px] bg-greenLight rounded-[8px] text-green font-semibold text-sm leading-[20px] tracking-[-0.2px]"
-                >
-                  -30%
-                </div>
-              </div>
-            </div>
-            <div class="w-full mt-[4px]">
-              <div class="flex flex-col gap-[8px]">
-                <p class="font-bold text-back text-sm leading-[20px]">Pull&Bear shrimp T-shirt</p>
-                <div class="flex flex-col">
-                  <p class="text-grayDark font-semibold text-xs leading-[16px] previous-price before:bg-black tracking-[-0.1px]">$69.90</p>
-                  <p class="text-black font-bold teext-[18px] leading-[26px] tracking-[-0.1px]">$49.00</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </swiper-slide>
-
-      <swiper-slide>
-        <div class="relative w-full flex flex-col shadow-sm">
-          <div
-            class="relative w-full h-[160px] sm:h-[276px] md:h-[224px] lg:h-[232px] xl:h-[210px] 2xl:h-[247px] rounded-tl-[16px] rounded-tr-[16px] overflow-hidden bg-gray flex items-center justify-center px-[20px]"
-          >
-            <img
-              class="max-w-[76px] sm:w-[131px] md:max-w-[106px] lg:max-w-[110px] xl:max-w-[100px] 2xl:max-w-[117px] w-full object-cover"
-              src="@/assets/imgs/shirt.png"
-              alt=""
-            />
-
-            <div class="absolute w-full top-[12px] px-[12px] flex items-start justify-between">
-              <div class="date w-max px-[8px] py-[4px] bg-gray flex items-center justify-center rounded-[8px]">
-                <div class="flex flex-col items-center">
-                  <p class="text-sm font-bold text-black leading-[20px] tracking-[-0.2px]">02:10:54</p>
-                </div>
-              </div>
-              <Icon icon="solar:heart-outline" class="text-xl text-black" />
-            </div>
-          </div>
-          <div class="w-full py-[12px] px-[16px] flex flex-col bg-white rounded-bl-[16px] rounded-br-[16px]">
-            <div class="flex items-center justify-between pb-[4px] border-b-[1px] border-gray">
-              <div class="flex items-center gap-[12px]">
-                <div class="w-[48px] h-[48px] rounded-full flex items-center justify-center bg-gray">
-                  <img class="w-full max-w-[36px]" src="@/assets/imgs/stores.svg" alt="" />
-                </div>
-                <p class="text-sm font-bold leading-[20px] sm:block hidden text-black">Pull&Bear</p>
-              </div>
-              <div class="flex items-center gap-[8px]">
-                <div
-                  class="py-[6px] px-[8px] bg-greenLight rounded-[8px] text-green font-semibold text-sm leading-[20px] tracking-[-0.2px]"
-                >
-                  -30%
-                </div>
-              </div>
-            </div>
-            <div class="w-full mt-[4px]">
-              <div class="flex flex-col gap-[8px]">
-                <p class="font-bold text-back text-sm leading-[20px]">Pull&Bear shrimp T-shirt</p>
-                <div class="flex flex-col">
-                  <p class="text-grayDark font-semibold text-xs leading-[16px] previous-price before:bg-black tracking-[-0.1px]">$69.90</p>
-                  <p class="text-black font-bold teext-[18px] leading-[26px] tracking-[-0.1px]">$49.00</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </swiper-slide>
-
-      <swiper-slide>
-        <div class="relative w-full flex flex-col shadow-sm">
-          <div
-            class="relative w-full h-[160px] sm:h-[276px] md:h-[224px] lg:h-[232px] xl:h-[210px] 2xl:h-[247px] rounded-tl-[16px] rounded-tr-[16px] overflow-hidden bg-gray flex items-center justify-center px-[20px]"
-          >
-            <img
-              class="max-w-[76px] sm:w-[131px] md:max-w-[106px] lg:max-w-[110px] xl:max-w-[100px] 2xl:max-w-[117px] w-full object-cover"
-              src="@/assets/imgs/shirt.png"
-              alt=""
-            />
-
-            <div class="absolute w-full top-[12px] px-[12px] flex items-start justify-between">
-              <div class="date w-max px-[8px] py-[4px] bg-gray flex items-center justify-center rounded-[8px]">
-                <div class="flex flex-col items-center">
-                  <p class="text-sm font-bold text-black leading-[20px] tracking-[-0.2px]">02:10:54</p>
-                </div>
-              </div>
-              <Icon icon="solar:heart-outline" class="text-xl text-black" />
-            </div>
-          </div>
-          <div class="w-full py-[12px] px-[16px] flex flex-col bg-white rounded-bl-[16px] rounded-br-[16px]">
-            <div class="flex items-center justify-between pb-[4px] border-b-[1px] border-gray">
-              <div class="flex items-center gap-[12px]">
-                <div class="w-[48px] h-[48px] rounded-full flex items-center justify-center bg-gray">
-                  <img class="w-full max-w-[36px]" src="@/assets/imgs/stores.svg" alt="" />
-                </div>
-                <p class="text-sm font-bold leading-[20px] sm:block hidden text-black">Pull&Bear</p>
-              </div>
-              <div class="flex items-center gap-[8px]">
-                <div
-                  class="py-[6px] px-[8px] bg-greenLight rounded-[8px] text-green font-semibold text-sm leading-[20px] tracking-[-0.2px]"
-                >
-                  -30%
-                </div>
-              </div>
-            </div>
-            <div class="w-full mt-[4px]">
-              <div class="flex flex-col gap-[8px]">
-                <p class="font-bold text-back text-sm leading-[20px]">Pull&Bear shrimp T-shirt</p>
-                <div class="flex flex-col">
-                  <p class="text-grayDark font-semibold text-xs leading-[16px] previous-price before:bg-black tracking-[-0.1px]">$69.90</p>
-                  <p class="text-black font-bold teext-[18px] leading-[26px] tracking-[-0.1px]">$49.00</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </swiper-slide>
-
-      <swiper-slide>
-        <div class="relative w-full flex flex-col shadow-sm">
-          <div
-            class="relative w-full h-[160px] sm:h-[276px] md:h-[224px] lg:h-[232px] xl:h-[210px] 2xl:h-[247px] rounded-tl-[16px] rounded-tr-[16px] overflow-hidden bg-gray flex items-center justify-center px-[20px]"
-          >
-            <img
-              class="max-w-[76px] sm:w-[131px] md:max-w-[106px] lg:max-w-[110px] xl:max-w-[100px] 2xl:max-w-[117px] w-full object-cover"
-              src="@/assets/imgs/shirt.png"
-              alt=""
-            />
-
-            <div class="absolute w-full top-[12px] px-[12px] flex items-start justify-between">
-              <div class="date w-max px-[8px] py-[4px] bg-gray flex items-center justify-center rounded-[8px]">
-                <div class="flex flex-col items-center">
-                  <p class="text-sm font-bold text-black leading-[20px] tracking-[-0.2px]">02:10:54</p>
-                </div>
-              </div>
-              <Icon icon="solar:heart-outline" class="text-xl text-black" />
-            </div>
-          </div>
-          <div class="w-full py-[12px] px-[16px] flex flex-col bg-white rounded-bl-[16px] rounded-br-[16px]">
-            <div class="flex items-center justify-between pb-[4px] border-b-[1px] border-gray">
-              <div class="flex items-center gap-[12px]">
-                <div class="w-[48px] h-[48px] rounded-full flex items-center justify-center bg-gray">
-                  <img class="w-full max-w-[36px]" src="@/assets/imgs/stores.svg" alt="" />
-                </div>
-                <p class="text-sm font-bold leading-[20px] sm:block hidden text-black">Pull&Bear</p>
-              </div>
-              <div class="flex items-center gap-[8px]">
-                <div
-                  class="py-[6px] px-[8px] bg-greenLight rounded-[8px] text-green font-semibold text-sm leading-[20px] tracking-[-0.2px]"
-                >
-                  -30%
-                </div>
-              </div>
-            </div>
-            <div class="w-full mt-[4px]">
-              <div class="flex flex-col gap-[8px]">
-                <p class="font-bold text-back text-sm leading-[20px]">Pull&Bear shrimp T-shirt</p>
-                <div class="flex flex-col">
-                  <p class="text-grayDark font-semibold text-xs leading-[16px] previous-price before:bg-black tracking-[-0.1px]">$69.90</p>
-                  <p class="text-black font-bold teext-[18px] leading-[26px] tracking-[-0.1px]">$49.00</p>
+                  <p class="text-black font-bold teext-[18px] leading-[26px] tracking-[-0.1px]">${{ item.discount_price }}</p>
                 </div>
               </div>
             </div>
@@ -1601,10 +1062,12 @@
 
 <script lang="ts">
 import { useFormatDate } from '@/composables/useDateFormat'
+import { useTruncateText, TruncateTextParams  } from '@/composables/useTruncate'
 import { useNewsStore, NewsData } from '@/stores/news/news'
 import { useUpcomingEventsStore, UpcomingEventsData } from '@/stores/upcoming-events/upcoming-events'
 import { useCompaniesStore, CompaniesData } from '@/stores/companies/companies'
 import { useRewardsStore, RewardsData } from '@/stores/rewards/rewards'
+import { useOffersStore, OffersData } from '@/stores/offers/offers'
 import { Pagination, Navigation } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
@@ -1632,12 +1095,14 @@ export default {
       upcomingEventsData: null as UpcomingEventsData['data'],
       companiesData: null as CompaniesData['data'],
       rewardsData: null as RewardsData['data'],
-      formatDate: null
+      offersData: null as OffersData['data'],
+      formatDate: null,
     }
   },
   created() {
-    const {formatDate} = useFormatDate()
+    const { formatDate } = useFormatDate()
     this.formatDate = formatDate
+
   },
   components: {
     HeaderComponent,
@@ -1687,6 +1152,10 @@ export default {
   },
 
   methods: {
+    truncateText(text: string, maxLength: number) {
+      const {truncatedOutput} = useTruncateText({text, maxLength})
+      return truncatedOutput
+    },
     async fetchNews() {
       const newsStore = useNewsStore()
       await newsStore.fetchNews()
@@ -1707,12 +1176,18 @@ export default {
       await rewardsStore.fetchRewards()
       this.rewardsData = rewardsStore.data
     },
+    async fetchOffers() {
+      const offersStore = useOffersStore()
+      await offersStore.fetchOffers()
+      this.offersData = offersStore.data
+    },
     async fetchAllSliderItems() {
       this.fetchNews()
       this.fetchUpcomingEvents()
       this.fetchCompanies()
       this.fetchRewards()
-    },    
+      this.fetchOffers()
+    },
     closeTurnonNotifications() {
       this.turnOnNotifications = false
     },

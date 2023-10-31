@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
-
+// Define your interface for News data
 export interface CompaniesData {
   data: Record<string, any> | null;
 }
@@ -15,7 +15,7 @@ export const useCompaniesStore = defineStore('companies', {
     async fetchCompanies() {
       try {
         const response = await axios.get('api/web-app/v1/companies')
-        this.data = response.data.data.data
+        this.data = response.data.data.data        
       } catch (err) {
         console.error(`Error fetching news ${err}`)
       }

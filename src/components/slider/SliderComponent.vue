@@ -4,10 +4,11 @@
       <div :class="!controllers ? 'hidden' : ''" class="w-full flex items-center justify-between mb-[24px]">
         <h5 class="text-black xl:text-xl 2xl:text-2xl font-bold leading-[38px] tracking-[-0.4[x]]">{{ sectionTitle }}</h5>
         <div class="flex items-center gap-[16px]">
-          <RouterLink :to="{ name: routeName }" class="text-pink font-semibold xl:text-sm 2xl:text-base leading-[22px] tracking-[-0.4px]">{{ $t('see_all') }}
+          <RouterLink :to="{ name: routeName }" class="text-pink font-semibold xl:text-sm 2xl:text-base leading-[22px] tracking-[-0.4px]"
+            >{{ $t('see_all') }}
           </RouterLink>
           <div class="slider-btns-responsive flex slider-nav items-center gap-[4px]">
-            <div @click="prev" class="cursor-pointer prev w-[48px] h-[48px] rounded-full bg-gray flex items-center justify-center">              
+            <div @click="prev" class="cursor-pointer prev w-[48px] h-[48px] rounded-full bg-gray flex items-center justify-center">
               <Icon icon="radix-icons:chevron-left" class="text-xl text-black" />
             </div>
             <div @click="next" class="cursor-pointer next w-[48px] h-[48px] rounded-full bg-gray flex items-center justify-center">
@@ -17,16 +18,17 @@
         </div>
       </div>
       <!-- Swiper -->
-      <swiper 
-        ref="slider" 
-        class="mySwiper h-full w-full" 
-        :modules="modules" 
-        :autoplay="autoplay ? autoplay : false" 
+      <swiper
+        ref="slider"
+        class="mySwiper h-full w-full"
+        :modules="modules"
+        :autoplay="autoplay ? autoplay : false"
         @swiper="onSwiper"
-        :slides-per-view="slidesPerViewIs" :space-between="spaceBetween" 
+        :slides-per-view="slidesPerViewIs"
+        :space-between="spaceBetween"
         @slideChange="onSlideChange"
-        :pagination="{ clickable: true }" 
-        navigation 
+        :pagination="{ clickable: true }"
+        navigation
         :scrollbar="{ draggable: true }"
       >
         <slot></slot>
@@ -45,7 +47,7 @@
 
 <script>
 import { Pagination, Navigation, Autoplay } from 'swiper'
-import {useSwiper, Swiper, SwiperSlide } from 'swiper/vue'
+import { useSwiper, Swiper, SwiperSlide } from 'swiper/vue'
 
 import 'swiper/css'
 import 'swiper/css/pagination'
@@ -75,7 +77,7 @@ export default {
     },
     breakpoint: {
       type: Array
-    }
+    },
   },
   components: {
     Swiper,

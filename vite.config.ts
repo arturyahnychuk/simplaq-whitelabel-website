@@ -40,7 +40,7 @@ export default defineConfig(({ command, mode }) => {
           changeOrigin: true,
           secure: false,
           headers: {
-            Origin: 'http://galeriesantovka.beta.mysimplaq.com/' // replace with tenant url
+            Origin: ' https://galerieharfa.beta.mysimplaq.com/' // replace with tenant url
           },
           configure: (proxy, options) => {
             proxy.on('error', (err, _req, _res) => {

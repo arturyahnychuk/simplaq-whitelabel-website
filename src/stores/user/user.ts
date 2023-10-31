@@ -15,6 +15,6 @@ interface UserStore {
 export const useUserStore = defineStore('user', {
   state: (): UserStore => ({
     data: {} as Data,
-    token: '123',
+    token: null,
   }),
 });

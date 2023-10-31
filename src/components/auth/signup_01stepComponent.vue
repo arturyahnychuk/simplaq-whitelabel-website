@@ -26,7 +26,7 @@
       </p>
 
       <div class="flex flex-col gap-[8px]">
-        <button
+        <button @click="registerWithGoogle"
           class="bg-gray justify-center flex items-center gap-[8px] py-[16px] rounded-[16px] text-black text-sm font-semibold leaing-[20px] tracking-[-0.2px]"
         >
           <Icon icon="flat-color-icons:google" class="text-xl text-black" />
@@ -56,12 +56,30 @@
 </template>
 
 <script lang="ts">
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+
+const provider = new GoogleAuthProvider();
+
 export default {
   name: 'signup-01step',
   emits: ['signupWithEmail'],
   methods: {
     registerWithEmail() {
       this.$emit('signupWithEmail')
+    },
+
+    registerWithGoogle() {
+      const auth = getAuth();
+      signInWithPopup(auth, provider)
+        .then((result) => {
+          const credential = GoogleAuthProvider.credentialFromResult(result);
+          const token = credential.accessToken;
+          console.log("firebase_token", token);
+        }).catch(error => {
+          console.log(error)
+        })
+
+
     }
   },
 }
